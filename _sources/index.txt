@@ -8,8 +8,10 @@ use with Outernet's L-band service.
 
 .. warning::
     This guide is a work in progress and may contain wrong and/or incomplete
-    information. Please use the issue tracker or `our forums
-    <https://discuss.outernet.is>`_ to discuss any problems you encounter.
+    information. Please use the `issue tracker 
+    <https://github.com/Outernet-Project/outernet-rpi-lband/issues>`_ or `our
+    forums <https://discuss.outernet.is>`_ to discuss any problems you
+    encounter.
 
 ==========  ===================================================================
 version     1.0a1
