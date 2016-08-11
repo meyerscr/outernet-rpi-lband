@@ -50,8 +50,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Outernet L-band on Rasbian'
-copyright = '2016, Outernet Inc <hello@outernet.is>'
-author = 'Outernet Inc <hello@outernet.is>'
+copyright = '2016, Outernet Inc <apps@outernet.is>'
+author = 'Outernet Inc <apps@outernet.is>'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -261,7 +261,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'OuternetL-bandonRasbian.tex', 'Outernet L-band on Rasbian Documentation',
-     'Outernet Inc \\textless{}hello@outernet.is\\textgreater{}', 'manual'),
+     'Outernet Inc \\textless{}apps@outernet.is\\textgreater{}', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
