@@ -28,7 +28,7 @@ software work together.
 .. note::
     Although these pieces of software are all part of the Outernet software
     eco-system, which is predominantly open-source, some of the executables are
-    closed-source due to different business interests.
+    closed-source.
 
 Virtually all of the software involved in this set-up is meant to be used as
 long-running background processes (a.k.a. daemons). Some of the programs
