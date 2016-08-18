@@ -5,7 +5,7 @@ Although the individual commands can be run directly in the terminal, we will
 use screen so the programs can be run in the background even after we log out
 of the system.
 
-screen basics
+Screen basics
 -------------
 
 Screen is a terminal multiplexer. Once started, you will be in a shell that
