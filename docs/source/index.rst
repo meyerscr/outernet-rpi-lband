@@ -1,10 +1,10 @@
 ==========================
-Outernet L-band on Rasbian
+Outernet L-band on Raspbian
 ==========================
 
 This guide shows how to deploy Outernet software on a `Raspberry Pi 
 <https://www.raspberrypi.org/>`_ using the stock Raspbian image, for
-use with Outernet's L-band service.
+use with Outernet's global L-band service.
 
 .. warning::
     This guide is a work in progress and may contain wrong and/or incomplete

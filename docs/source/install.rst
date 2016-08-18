@@ -9,8 +9,8 @@ Preparing the device
 --------------------
 
 Connect your Raspberry Pi to a router either using WiFi (Raspberry Pi 3) or LAN
-cable (all versions). Also plug in the SDR radio, and attach the LNA and
-antenna to it. If you want to use a keyboard and a monitor, hook those up as
+cable (all versions). Also plug in the SDR (software defined radio; rtlsdr dongle), and attach the LNA and
+antenna. If you want to use a keyboard and a monitor, hook those up as
 well.
 
 Download locations
@@ -101,9 +101,9 @@ directory and make sure you find it agreeable. To complete the install::
 
     $ sudo make install
 
-ONDD license is found in the ``/usr/local/share/doc/ondd/LICENSE.txt``.
+ONDD's license is found in the ``/usr/local/share/doc/ondd/LICENSE.txt``.
 
-Installing StarSDR and L-band demodulator
+Installing StarSDR and the L-band software demodulator
 -----------------------------------------
 
 To install the StarSDR library and the demodulator program::

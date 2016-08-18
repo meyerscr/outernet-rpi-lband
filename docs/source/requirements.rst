@@ -4,10 +4,10 @@ Requirements
 In order to follow this guide, you will need:
 
 - Raspberry Pi
-- 4GB or bigger microSD card with Raspbian image
-- SDR radio (contact Outernet for more information)
+- 4GB or larger microSD card with a Raspbian image
+- SDR (contact Outernet for more information)
 - LNA (contact Outernet for more information)
-- patch antenna
+- antenna with sufficient gain
 - Internet connection configured on Raspbian
 - knowledge of Linux command line
 

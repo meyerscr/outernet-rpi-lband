@@ -6,11 +6,11 @@ service works.
 
 The files that are datacast by Outernet are encoded, modulated, and sent to
 several Inmarsat satellites. These satellites transmit the radio waves in the
-`L frequency band <https://en.wikipedia.org/wiki/L_band>`_. The waves are
+`L band frequency range <https://en.wikipedia.org/wiki/L_band>`_. The waves are
 received by a radio on your receiver and then passed on to the software
-demodulator. The demodulator extracts demodulated data and passes it onto the
-decoder, which extracts the file information from the data and reconstructs the
-files on local storage.
+demodulator. The demodulator turns the analog signal into bits and then passes them
+onto the decoder, which extracts the file information from the data and reconstructs
+the files on local storage.
 
 The software components involved in this process are:
 
