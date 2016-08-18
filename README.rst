@@ -1,4 +1,4 @@
-Outernet L-band service on Raspberry Pi
+Outernet L-band Service on Raspberry Pi
 =======================================
 
 This is source text of the documentation found at
