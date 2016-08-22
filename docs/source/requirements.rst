@@ -5,13 +5,15 @@ In order to follow this guide, you will need:
 
 - Raspberry Pi
 - 4GB or larger microSD card with a Raspbian image
-- SDR (contact Outernet for more information)
-- LNA (contact Outernet for more information)
+- SDR radio dongle
+- LNA
 - antenna with sufficient gain
 - Internet connection configured on Raspbian
 - knowledge of Linux command line
 
-You may also want to have:
+The radio, LNA, and antenna, can be purchased `through Outernet
+<https://outernet.is/products>`_ either individually or as a kit. You may also
+want to have:
 
 - HDMI monitor
 - HDMI cable
