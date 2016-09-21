@@ -53,7 +53,7 @@ configure_udev() {
     vid="$(echo "$ids" | cut -d: -f1)"
     pid="$(echo "$ids" | cut -d: -f2)"
     rule "$vid" "$pid" >> "$RULESFILE"
-  done < "sdrids.txt"
+  done < "${ANY_SRC}/sdrids.txt"
   echo "Linking $RULES -> $RULESFILE"
   ln -sf "$RULESFILE" "$RULES"
   udevadm control --reload
