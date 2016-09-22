@@ -5,6 +5,13 @@ Although the individual commands can be run directly in the terminal, we will
 use screen so the programs can be run in the background even after we log out
 of the system.
 
+Install screen
+--------------
+
+We will need to install screen before we can use it. ::
+
+    $ sudo apt-get install screen
+
 Screen basics
 -------------
 
