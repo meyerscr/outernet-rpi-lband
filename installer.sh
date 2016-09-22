@@ -2,6 +2,7 @@
 
 . /etc/*-release
 
+SRCDIR="$(dirname $0)"
 PREFIX="${PREFIX:=/usr/local}"
 BINDIR="${PREFIX}/bin"
 SHAREDIR="${PREFIX}/share/outernet"
@@ -13,10 +14,10 @@ STARSDR_VERSION=1.1
 INST_STYLE="normal"
 VERSION="1.0a1"
 ARCH=$(uname -m)
-ARCH_SRC=${ARCH}
-ANY_SRC=common
+ARCH_SRC="${SRCDIR}/${ARCH}"
+ANY_SRC="${SRCDIR}/common"
 DISTRO="${ID_LIKE:=${ID}}"
-DISTRO_INSTALLER="install-librarian-${DISTRO}.sh"
+DISTRO_INSTALLER="${SRCDIR}/install-librarian-${DISTRO}.sh"
 
 export ANY_SRC
 export DISTRO
@@ -159,7 +160,7 @@ inst() {
 	export SPOOLDIR="$spooldir"
 	export DLDIR="$dldir"
 
-  if [ -n "$DISTRO_INSTALLER" ]; then
+  if [ -f "$DISTRO_INSTALLER" ]; then
     readopt "Do you wish to install the web-based user interface? [Y/n] " "y"
     instui="$val"
 		if is_yes "$instui"; then
