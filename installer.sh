@@ -88,6 +88,8 @@ inst() {
   inst_file 755 "${ANY_SRC}/bin/decoder.sh" "${BINDIR}/decoder"
   inst_file 644 "${ANY_SRC}/presets.sh" "${SHAREDIR}/presets"
   inst_file 644 "${ANY_SRC}/sdrids.txt" "${SHAREDIR}/sdrids.txt"
+  inst_file 644 "${ANY_SRC}/demod_blacklist.conf" \
+    "/etc/modprobe.d/demod_blacklist.conf"
 
   # Install arch-specific files
   inst_file 755 "${ARCH_SRC}/bin/ondd-${ONDD_VERSION}" "${BINDIR}/ondd"
@@ -185,6 +187,9 @@ uninst() {
     echo "********************************************"
   fi
   echo "Finished"
+  echo "********************************************"
+  echo "              REBOOT NOW!"
+  echo "********************************************"
 }
 
 if [ "$USER" != root ]; then

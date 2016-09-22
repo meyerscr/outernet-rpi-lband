@@ -22,27 +22,12 @@ get_radio() {
   [ "$nradios" = 1 ] && echo "$radios"
 }
 
-delmod() {
-  modname="$1"
-  echo "Attempting to remove driver '$modname'"
-  sudo rmmmod -f "$modname"
-}
-
-killmod() {
-  modname="$1"
-  lsmod | grep -q "$modname" && delmod "$modname"
-}
-
 rtlsdr_demod() {
-  killmod "rtl2830"
-  killmod "rtl2832"
-  killmod "dvb_usb_rtl128xxu"
   rtl_biast -b 1
   sdr100 -o /tmp/ondd.data "$@"
 }
 
 mirics_demod() {
-  killmod "miri_sdr"
   sdr100 -o /tmp/ondd.data "$@"
 }
 
