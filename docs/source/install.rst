@@ -70,6 +70,14 @@ files, and you can always set up your own methods of accessing the files (e.g.,
 FTP, HTTP server, etc). If you wish to try Librarian out, answer ``y`` to this 
 question.
 
+.. warning::
+    If you choose to install the web-based interface, your Raspbian install
+    will be upgraded to Jessie testing. The process may take a while to
+    complete, and many packages that are completely unrelated will be upgraded
+    (e.g., Libre Office). Also note that build tools will be installed in the
+    process. This is a requirement for some of the packages that Librarian
+    depends on.
+
 Uninstalling the software
 -------------------------
 
