@@ -88,6 +88,7 @@ inst() {
   inst_file 755 "${ANY_SRC}/bin/decoder.sh" "${BINDIR}/decoder"
   inst_file 644 "${ANY_SRC}/presets.sh" "${SHAREDIR}/presets"
   inst_file 644 "${ANY_SRC}/sdrids.txt" "${SHAREDIR}/sdrids.txt"
+  inst_file 644 "${ANY_SRC}/ca.crt" "${SHAREDIR}/ca.crt"
   inst_file 644 "${ANY_SRC}/demod_blacklist.conf" \
     "/etc/modprobe.d/demod_blacklist.conf"
 
@@ -110,7 +111,6 @@ inst() {
   inst_file 644 "ONDD_LICENSE.txt" "${SHAREDIR}/ONDD_LICENSE.txt"
   inst_file 644 "SDR100_LICENSE.txt" "${SHAREDIR}/SDR100_LICENSE.txt"
   inst_file 644 "COPYING.StarSDR" "${SHAREDIR}/COPYING.StarSDR"
-  inst_file 644 "ca.crt" "${SHAREDIR}/ca.crt"
 
   # Write out version file
   echo "$VERSION" > "${SHAREDIR}/version"
