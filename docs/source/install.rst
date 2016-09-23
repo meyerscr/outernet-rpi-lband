@@ -13,230 +13,78 @@ cable (all versions). Also plug in the SDR (software defined radio; rtlsdr dongl
 antenna. If you want to use a keyboard and a monitor, hook those up as
 well.
 
-Download locations
-------------------
-
-Before we begin, we need to decide on where to put the downloaded files. There
-are two directories where files will be stored:
-
-- temporary cache directory for unfinished downloads
-- permanent directory for finished downloads
-
-In this guide, we will use ``/var/spool/ondd`` for temporary download cache,
-and ``/srv/downloads`` for finished downloads. Whether you go with these or
-some other locations, it is recommended you write them down for future
-reference.
-
-Let's create the download locations::
-
-    $ sudo mkdir -p /var/spool/ondd /srv/downloads
-
-Switching to Raspbian testing
+Downloading the installer kit
 -----------------------------
 
-Your Raspbian install is going to be 'upgraded' to the testing repository. If
-you are not sure this is a good idea (or you know it is not), we recommend
-creating an SD card specifically for running the Outernet software, rather than
-modifying your existing cards. 
+The installer and its files are now distributed as part of the `Outernet L-band
+Service on Raspberry Pi respository on GitHub
+<https://github.com/Outernet-Project/outernet-rpi-lband>`_. Download the
+`latest stable version
+<https://github.com/Outernet-Project/outernet-rpi-lband/archive/master.tar.gz>`
+and extract it::
 
-To upgrade to Raspbian testing, we will run the following commands::
+    $ tar xvf master.tar.gz
 
-    $ cat /etc/apt/sources.list | sed 's/jessie/testing/' | sudo tee /etc/apt/sources.list.d/testing.list
-    $ sudo apt-get update
-    $ sudo apt-get upgrade
+Running the installer
+---------------------
 
-It is a good idea to reboot once after the previous steps.
+Enter the unpacked directory and run the installer::
 
-Installing dependencies
------------------------
+    $ cd outernet-rpi-lband-master
+    $ sudo ./installer.sh
 
-Apart from the software mentioned in the :doc:intro section, we also need a few
-of the usual Raspbian packages that these programs depend on. ::
+The installer will ask you a few things.
 
-    $ sudo apt-get install postgresql libev-dev libpq-dev python-dev build-essential screen libusb-1.0
+Configure udev
+~~~~~~~~~~~~~~
 
-Due to a bug in the ``python-distlib``, this package needs to be downgraded. To
-do this, run::
+The radio devices are accessible only to root user by default. If you wish to 
+run the Outernet software as a non-root user (recommended), you should answer
+``y`` to this question. Udev will be reconfigured so that the radio device is
+accessible to non-root users.
 
-    $ wget http://ftp.debian.org/debian/pool/main/d/distlib/python-distlib_0.1.9-1_all.deb
-    $ wget http://ftp.debian.org/debian/pool/main/d/distlib/python-distlib-whl_0.1.9-1_all.deb
-    $ sudo dpkg -i *.deb
+.. note::
+    If you choose to have the installer reconfigure udev, you will also need to 
+    reconnect the radio for the changes to take effect.
 
-Configuring postgres
---------------------
+Choose cache and storage paths
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Raspbian's PostgreSQL package, by default, enforces stricter access control.
-For the quick set-up we are doing, we will need to loosen it up a little. Edit
-the file named ``/etc/postgresql/9.5/main/pg_hba.conf`` and find the lines that
-start with ``host`` and end in ``md5``. Change the ``md5`` portion to
-``trust``.  This causes all connections coming from within the Raspberry Pi to
-be treated as trusted connection. Once the configuration is modified, we need
-to restart the database server::
+Cache path is where the decoder stores partial downloads. The storage directory
+is where completed downloads will be written. If you wish to customize these
+paths, then enter the correct paths. Otherwise, press Enter to accept the
+defaults. 
 
-    $ sudo service postgresql restart
+You can also have the installer create these paths for you. When you choose
+this option, the directories are created, and also set to 777 permissions. You 
+can either answer with ``n`` to this question, and create the paths yourself
+with appropriate permissions, or answer ``y`` to have the installer take care 
+of it.
+
+Install the web-based interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The installer can install and configure the web-based interface called 
+`Librarian <https://librarian.outernet.is/>`_. This is not necessary to receive 
+files, and you can always set up your own methods of accessing the files (e.g.,
+FTP, HTTP server, etc). If you wish to try Librarian out, answer ``y`` to this 
+question.
 
 .. warning::
-    This PosgreSQL configuration is unsafe if you ware exposing Raspberry Pi to
-    the Internet with its default SSH username and password.
+    If you choose to install the web-based interface, your Raspbian install
+    will be upgraded to Jessie testing. The process may take a while to
+    complete, and many packages that are completely unrelated will be upgraded
+    (e.g., Libre Office). Also note that build tools will be installed in the
+    process. This is a requirement for some of the packages that Librarian
+    depends on.
 
-Installing the Outernet software
---------------------------------
+Uninstalling the software
+-------------------------
 
-Now we are ready to install the Outernet software. All necessary software is
-located in the Outernet's source repository at `archive.outernet.is/sources/ 
-<https://archive.outernet.is/sources/>`_ (even though some of the software are
-not source tarballs).
+To uninstall the software, run the installer and pass ``uninstall`` argument::
 
-Installing ONDD
----------------
-
-To install ONDD::
-
-    $ wget https://archive.outernet.is/sources/ondd-rpi3-armhf-2.2.0.tar.gz
-    $ tar xvf ondd-rpi3-armhf-2.2.0.tar.gz
-    $ cd ondd-rpi3-armhf-2.2.0
-
-Before installing, please review the license file found in the unpacked
-directory and make sure you find it agreeable. To complete the install::
-
-    $ sudo make install
-
-ONDD's license is found in the ``/usr/local/share/doc/ondd/LICENSE.txt``.
-
-Installing StarSDR and the L-band software demodulator
------------------------------------------
-
-To install the StarSDR library and the demodulator program::
-
-    $ wget https://archive.outernet.is/sources/starsdr-rpi3-armhf-2.0.tar.gz
-    $ tar xvf starsdr-rpi3-armhf-2.0.tar.gz
-    $ cd starsdr-rpi3-armhf-2.0
-
-Before installing, please review the license file found in the unpacked
-directory and make sure you find it agreeable. To complete the install::
-
-    $ sudo make install
-
-Installing Librarian user interface
------------------------------------
-
-The Librarian user interface is a Python application, and is therefore
-installed using ``pip``::
-
-    $ sudo pip install --extra-index-url https://archive.outernet.is/sources/pypi/simple/ https://github.com/Outernet-Project/librarian/archive/v4.0.post1.tar.gz
+    $ cd outernet-rpi-lband-master
+    $ sudo ./installer.sh uninstall
 
 .. note::
-    Some of the packages will require C extensions, so expect the installation
-    to take a while.
-
-Creating the Librarian configuration file
------------------------------------------
-
-Librarian must be configured before it can run with our set-up. To do this
-create and edit a file /etc/librarian.ini (it can be anywhere as long as your
-remember the location and adjust the example commands accordingly):
-
-.. code-block:: 'ini'
-
-    [config]
-
-    defaults =
-        /usr/local/lib/python2.7/dist-packages/librarian/config.ini
-
-    [app]
-
-    debug = no
-    bind = 0.0.0.0
-    port = 80
-    default_route = filemanager:list
-    default_route_args =
-        path:
-
-    [ondd]
-
-    band = l
-    demod_restart_command = echo 'noop'
-
-    [lock]
-
-    file = /var/run/librarian.lock
-
-    [platform]
-
-    name = rpi3
-    version_file = /etc/version
-
-    [logging]
-
-    output = /var/log/librarian.log
-    syslog = /var/log/messages
-    size = 5M
-    backups = 2
-    fsal_log = /var/log/fsal.log
-
-    [setup]
-
-    file = /srv/librarian/librarian.json
-
-    [mako]
-
-    module_directory = /tmp/mako_cache
-
-    [fsal]
-
-    socket = /var/run/fsal.ctrl
-
-    [menu]
-
-    main = 
-        files
-
-    [cache]
-
-    backend = in-memory
-    timeout = 100
-
-We also need to create the FSAL (filesystem indexer) configuration. Create and
-edit a file called /etc/fsal.ini:
-
-.. code-block:: 'ini'
-        
-    [config]
-
-    defaults =
-        /usr/lib/python2.7/site-packages/fsal/fsal-server.ini
-
-    [fsal]
-
-    # Adjust this as needed
-    basepaths = 
-      /srv/downloads 
-
-    socket = /var/run/fsal.ctrl
-
-    # Folders that are blacklisted
-    +blacklist = 
-      ^.platform(/.*)?$ 
-      ^(.*/)?.thumbs(/.*)?$ 
-      ^updates(/.*)?$ 
-      ^legacy(/.*)?$ 
-      ^FSCK.*.REC$
-
-    [logging]
-
-    output = /var/log/fsal.log
-    size = 5M
-    backups = 2
-
-.. note::
-    The example :download:`librarian.ini <examples/librarian.ini>` and 
-    :download:`fsal.ini <examples/fsal.ini>` are provided for convenience.
-
-Add the version file
---------------------
-
-Although not strictly required, we will add a version file for completeness.
-Note the version in the table at the start of this guide and echo that version
-into the version file::
-
-    $ echo 'VERSION' | sudo tee /etc/version
+    Uninstalling does not remove downloaded files or settings.

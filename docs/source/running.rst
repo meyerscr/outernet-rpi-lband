@@ -5,6 +5,13 @@ Although the individual commands can be run directly in the terminal, we will
 use screen so the programs can be run in the background even after we log out
 of the system.
 
+Install screen
+--------------
+
+We will need to install screen before we can use it. ::
+
+    $ sudo apt-get install screen
+
 Screen basics
 -------------
 
@@ -28,11 +35,16 @@ Running the programs
 Programs are run in this order:
 
 - demodulator (demod)
-- decoder (ondd)
+- decoder (decoder)
 - web based interface (librarian)
 
-Let's start screen as root. We will name this session 'outernet' so we can
-refer to it in future. ::
+Let's start screen. We will name this session 'outernet' so we can refer to it
+in future. ::
+
+    $ screen -S outernet
+
+If you haven't reconfigured udev during installation, you will need to run 
+screen as root::
 
     $ sudo screen -S outernet
 
@@ -40,20 +52,19 @@ Running the demodulator
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 In the first shell, let's start the demodulator. We first need to find out the
-profile we should use. To do this run ``demod-profile`` without any arguments.
-Once we know the profile name (in this example, we will use 'global'), we run
+profile we should use. To do this run ``demod-presets`` without any arguments.
+Once we know the profile name (in this example, we will use 'euraf'), we run
 the following command::
 
-    # demod-profile global
+    $ demod-presets euraf
 
 Running the decoder
 ~~~~~~~~~~~~~~~~~~~
 
 Now we need to create another shell with Ctrl-A Ctrl-C. In the new shell, we
-will run the decoder. Refer to the download and download cache locations we
-decided on in the :doc:install section. ::
+will run the decoder. ::
 
-    # ondd -V -c /var/spool/ondd -o /srv/downloads -D /var/run/ondd.data
+    $ decoder
 
 
 Starting the indexer
@@ -62,7 +73,7 @@ Starting the indexer
 After creating a new shell with Ctrl-A Ctrl-C, the indexer is started using the 
 ``fsal`` command::
 
-    # fsal --conf /etc/fsal.ini
+    $ fsal --conf /etc/fsal.ini
 
 Starting the web UI
 ~~~~~~~~~~~~~~~~~~~
@@ -70,7 +81,7 @@ Starting the web UI
 We create yet another shell with Ctrl-A Ctrl-C. In this shell, we will start
 Librarian::
 
-    # librarian --conf /etc/librarian.ini
+    $ librarian --conf /etc/librarian.ini
 
 Within less than a minute, the server will start responding on the port 80.
 
@@ -78,7 +89,8 @@ Detaching from the screen session
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After starting all the software, we may now detach from the screen session by
-using the Ctrl-A Ctrl-D combination.
+using the Ctrl-A Ctrl-D combination. This session will continue to run in the 
+background as long as the device has power and is not rebooted.
 
 At some later time, if we wish to see what the programs are doing, we can
 reattach to the session with ``screen -rDS outernet``.
