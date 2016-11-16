@@ -3,7 +3,7 @@
 APT="apt-get -y --force-yes"
 DEBIAN_FRONTEND=noninteractive
 POOL_URL="http://ftp.debian.org/debian/pool/main"
-PGHBA="/etc/postgresql/9.5/main/pg_hba.conf"
+PGHBA="/etc/postgresql/9.6/main/pg_hba.conf"
 LIBRARIAN_VER="v4.0.post1"
 PLATFORM="$(uname -n)"
 ANY_SRC="${ANY_SRC:=common}"
