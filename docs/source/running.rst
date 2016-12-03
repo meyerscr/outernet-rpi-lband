@@ -83,7 +83,7 @@ Librarian::
 
     $ librarian --conf /etc/librarian.ini
 
-Within less than a minute, the server will start responding on the port 80.
+Within less than a minute, the server will start responding on the port 8080.
 
 Detaching from the screen session
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
