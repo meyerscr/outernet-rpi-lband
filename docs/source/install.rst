@@ -20,7 +20,7 @@ The installer and its files are now distributed as part of the `Outernet L-band
 Service on Raspberry Pi respository on GitHub
 <https://github.com/Outernet-Project/outernet-rpi-lband>`_. Download the
 `latest stable version
-<https://github.com/Outernet-Project/outernet-rpi-lband/archive/master.tar.gz>`
+<https://github.com/Outernet-Project/outernet-rpi-lband/archive/master.tar.gz>`_
 and extract it::
 
     $ tar xvf master.tar.gz
